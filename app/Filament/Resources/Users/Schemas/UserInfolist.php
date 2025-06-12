@@ -11,6 +11,8 @@ class UserInfolist
     {
         return $schema
             ->components([
+                // TextEntry::make('uuid')
+                //     ->label('UUID'),
                 TextEntry::make('name'),
                 TextEntry::make('username'),
                 TextEntry::make('dob')
