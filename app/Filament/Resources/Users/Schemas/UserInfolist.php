@@ -19,7 +19,7 @@ class UserInfolist
                     ->schema([
                         TextEntry::make('webhook_url')
                             ->label('Webhook URL')
-                            ->state('https://tenant1.myapp.test/webhooks/incoming/019761a0-003c-7254-a477-a42ae760badd')
+                            ->state('https://tenant1.someappdomain.test/webhooks/incoming/019761a0-003c-7254-a477-a42ae760badd')
                             ->copyable()
                             ->copyMessage('Webhook URL copied'),
                     ]),
