@@ -36,8 +36,26 @@ class ViewUser extends ViewRecord
                 }),
 
             Action::make('regenateTokenWithConfirmation')
-                ->label('Regenerate token with confirmation')
+                ->label('Regenerate token - confirmation modal')
+                ->modalHeading('Regenerate token - confirmation modal')
                 ->requiresConfirmation()
+                ->color('warning')
+                ->action(function () {
+                    $this->newToken = Str::uuid();
+
+                    Notification::make()
+                        ->title('Token regenerated')
+                        ->success()
+                        ->send();
+
+                    $this->replaceMountedAction('showNewToken');
+                }),
+
+            Action::make('regenateTokenWithModal')
+                ->label('Regenerate token - custom modal')
+                ->modalHeading('Regenerate token - custom modal')
+                ->modalDescription('Are you sure you want to regenerate the token?')
+                ->modalSubmitActionLabel('Yes')
                 ->color('warning')
                 ->action(function () {
                     $this->newToken = Str::uuid();
