@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\TestBarChartWidget;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
@@ -16,6 +17,7 @@ use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\EmbeddedSchema;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Form;
+use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Width;
 
@@ -35,6 +37,8 @@ class TestPage extends Page
         return $schema
             ->components([
                 $this->getFormContentComponent(),
+
+                Livewire::make(TestBarChartWidget::class),
 
                 Action::make('testAction')
                     ->color('gray')
