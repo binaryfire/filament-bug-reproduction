@@ -8,6 +8,8 @@ class TestBarChartWidget extends ChartWidget
 {
     protected ?string $heading = 'Test Chart';
 
+    protected $listeners = ['new-data' => '$refresh'];
+
     protected function getData(): array
     {
         return [
