@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Code;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\EloquentSortable\Sortable;
@@ -49,5 +52,15 @@ class User extends Authenticatable implements Sortable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function code(): HasMany
+    {
+        return $this->hasMany(Code::class);
+    }
+
+    public function latestCode(): HasOne
+    {
+        return $this->hasOne(Code::class)->latestOfMany();
     }
 }

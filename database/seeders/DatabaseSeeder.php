@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         Code::create([
             'name' => 'Test',
             'code' => $htmlContent,
+            'user_id' => 1,
         ]);
     }
 }

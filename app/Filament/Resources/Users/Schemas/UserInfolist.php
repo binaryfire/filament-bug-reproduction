@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use Filament\Forms\Components\Textarea;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
@@ -13,6 +14,8 @@ class UserInfolist
     {
         return $schema
             ->components([
+                TextEntry::make('lastestCode.code'),
+
                 Section::make()
                     ->heading('Information')
                     ->description('Additional information.')

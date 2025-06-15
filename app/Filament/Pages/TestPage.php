@@ -4,18 +4,15 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets\TestBarChartWidget;
 use Filament\Actions\Action;
-use Filament\Facades\Filament;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\OneTimeCodeInput;
+use Filament\Forms\Components\CodeEditor;
+use Filament\Forms\Components\CodeEditor\Enums\Language;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\EmbeddedSchema;
-use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Form;
 use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Schema;
@@ -49,7 +46,7 @@ class TestPage extends Page
                         Textarea::make('description')
                             ->columnSpanFull(),
                     ])
-                    ->action(fn() => dd('Test Action')),
+                    ->action(fn($data) => dd($data)),
 
                 Livewire::make(TestBarChartWidget::class),
             ]);
@@ -80,12 +77,10 @@ class TestPage extends Page
                 TextInput::make('name')
                     ->required(),
 
-                TextInput::make('code')
-                    ->required()
-                    ->numeric()
-                    ->type('text')
-                    ->length(6)
-                    //
+                // CodeEditor::make('code')
+                //     ->default(fn() => $this->getExampleData())
+                //     ->disabled()
+                //     ->language(Language::Json),
             ]);
     }
 
@@ -107,5 +102,21 @@ class TestPage extends Page
     {
         $data = $this->form->getState();
         dd($data);
+    }
+
+    /**
+     * Get example JSON data
+     */
+    private function getExampleData(): string
+    {
+        return json_encode([
+            'name' => 'Example Request',
+            'url' => 'https://api.example.com/data',
+            'method' => 'GET',
+            'headers' => [
+                'Authorization' => 'Bearer your_token_here',
+                'Content-Type' => 'application/json',
+            ]
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
 }

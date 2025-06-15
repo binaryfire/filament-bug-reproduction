@@ -17,6 +17,10 @@ class CodeTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
+
+                TextColumn::make('user.name')
+                    ->label('Created by'),
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
