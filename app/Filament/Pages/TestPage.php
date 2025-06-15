@@ -9,6 +9,7 @@ use Filament\Forms\Components\CodeEditor\Enums\Language;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Infolists\Components\KeyValueEntry;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Component;
@@ -33,8 +34,6 @@ class TestPage extends Page
     {
         return $schema
             ->components([
-                $this->getFormContentComponent(),
-
                 Action::make('testAction')
                     ->color('info')
                     ->label('Test Action')
@@ -47,6 +46,8 @@ class TestPage extends Page
                             ->columnSpanFull(),
                     ])
                     ->action(fn($data) => dd($data)),
+
+                $this->getFormContentComponent(),
 
                 Livewire::make(TestBarChartWidget::class),
             ]);
@@ -76,6 +77,12 @@ class TestPage extends Page
 
                 TextInput::make('name')
                     ->required(),
+
+                KeyValueEntry::make('headers')
+                    ->state([
+                        'Report-To' =>	'"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=fSJmTaohLP5vSMo4zFHyV5iIWH58YMz%2BhkgKd4sA5dnx5y%2BTM9E9tFJg2lR1IEaSZKn3GH5fm%2BnBukAaiaLPkHCOLvvmcJGYDiXn1O2I"}]}',
+                    ])
+                    ->label('Headers'),
 
                 // CodeEditor::make('code')
                 //     ->default(fn() => $this->getExampleData())
