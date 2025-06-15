@@ -14,7 +14,4 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
-    server: {
-        cors: true, // Allow CORS for all origins for debugging
-    },
 });

@@ -38,10 +38,8 @@ class TestPage extends Page
             ->components([
                 $this->getFormContentComponent(),
 
-                Livewire::make(TestBarChartWidget::class),
-
                 Action::make('testAction')
-                    ->color('gray')
+                    ->color('info')
                     ->label('Test Action')
                     ->modalWidth(Width::TwoExtraLarge)
                     ->schema([
@@ -51,7 +49,9 @@ class TestPage extends Page
                         Textarea::make('description')
                             ->columnSpanFull(),
                     ])
-                    ->action(fn() => dd('Test Action'))
+                    ->action(fn() => dd('Test Action')),
+
+                Livewire::make(TestBarChartWidget::class),
             ]);
     }
 
