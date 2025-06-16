@@ -18,6 +18,7 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 
 class TabsWidgetTestPage extends Page
@@ -57,14 +58,9 @@ class TabsWidgetTestPage extends Page
                     ]),
 
                 Action::make('refreshParent')
-                    ->schema([
-                        TextInput::make('new_name')
-                            ->required()
-                            ->columnSpanFull(),
-                    ])
-                    ->action(function (array $data) {
+                    ->action(function () {
                         $this->dispatch('new-data', [
-                            'name' => $data['new_name'],
+                            'uuid' => Str::uuid(),
                         ]);
 
                         Notification::make()
@@ -72,6 +68,23 @@ class TabsWidgetTestPage extends Page
                             ->success()
                             ->send();
                     })
+
+                // Action::make('refreshParent')
+                //     ->schema([
+                //         TextInput::make('new_name')
+                //             ->required()
+                //             ->columnSpanFull(),
+                //     ])
+                //     ->action(function (array $data) {
+                //         $this->dispatch('new-data', [
+                //             'name' => $data['new_name'],
+                //         ]);
+
+                //         Notification::make()
+                //             ->title('Data Updated')
+                //             ->success()
+                //             ->send();
+                //     })
             ]);
     }
 
@@ -85,8 +98,9 @@ class TabsWidgetTestPage extends Page
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->required(),
+                TextInput::make('name'),
+
+                TextInput::make('uuid'),
             ]);
     }
 

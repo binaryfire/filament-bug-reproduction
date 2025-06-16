@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->registration()
             ->profile(EditProfile::class)
+            //->spa()
             ->unsavedChangesAlerts()
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->colors([
