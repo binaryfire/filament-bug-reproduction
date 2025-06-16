@@ -36,11 +36,11 @@ class SnapshotMissingBug extends Page
         $this->form->fill();
     }
 
-    #[On('new-data')]
-    public function refreshParent(array $data): void
-    {
-        $this->form->fill($data);
-    }
+    // #[On('new-data')]
+    // public function refreshParent(array $data): void
+    // {
+    //     $this->form->fill($data);
+    // }
 
     public function content(Schema $schema): Schema
     {
@@ -96,7 +96,8 @@ class SnapshotMissingBug extends Page
     {
         return $schema
             ->components([
-                TextInput::make('number'),
+                TextInput::make('number')
+                    ->required(),
             ]);
     }
 
