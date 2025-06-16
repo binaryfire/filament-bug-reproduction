@@ -65,7 +65,9 @@ class SnapshotMissingBug extends Page
 
                                 Tab::make('Tab 2')
                                     ->schema([
-                                        Livewire::make(TestBarChartWidget::class),
+                                        Livewire::make(TestBarChartWidget::class)
+                                            // Add unique key to avoid diffing issues
+                                            ->key(Str::random(10)),
                                     ]),
                             ]),
                     ]),
