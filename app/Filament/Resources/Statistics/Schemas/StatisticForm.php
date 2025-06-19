@@ -78,8 +78,7 @@ class StatisticForm
                                     'record' => $record,
                                 ])
                                 ->key(Str::random(10))
-                                ->columnSpanFull()
-                                ->extraAttributes(['wire:loading.class' => 'chart-loading']),
+                                ->columnSpanFull(),
                         ]),
                 ]),
         ];
