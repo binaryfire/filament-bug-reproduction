@@ -24,6 +24,12 @@ class SubtaskResource extends Resource
 
     protected static ?string $parentResource = TaskResource::class;
 
+    protected static ?string $slug = 'mini-tasks';
+
+    protected static ?string $modelLabel = 'mini task';
+
+    protected static ?string $pluralModelLabel = 'mini tasks';
+
     public static function form(Schema $schema): Schema
     {
         return SubtaskForm::configure($schema);
