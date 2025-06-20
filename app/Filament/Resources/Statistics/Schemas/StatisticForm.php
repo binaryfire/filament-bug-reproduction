@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Statistics\Schemas;
 
 use App\Filament\Resources\Statistics\Widgets\StatChartWidget;
+use Filament\Forms\Components\CodeEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\KeyValueEntry;
@@ -69,11 +70,15 @@ class StatisticForm
                     Tab::make('Raw')
                         ->schema([
                             KeyValueEntry::make('data')
-                                ->hidden(fn ($operation) => $operation === 'create')
                                 ->label('Raw data')
                                 ->keyLabel('Month')
                                 ->valueLabel('Value'),
 
+                            CodeEditor::make('data')
+                                ->formatStateUsing(fn ($state) => is_array($state) ? json_encode($state, JSON_PRETTY_PRINT) : $state)
+                                ->label('Raw data')
+                                ->disabled()
+                                ->columnSpanFull(),
                         ]),
 
                     Tab::make('Chart')
