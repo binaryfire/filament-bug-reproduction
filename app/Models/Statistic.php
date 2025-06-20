@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\SubStatistic;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Statistic extends Model
 {
@@ -29,6 +31,14 @@ class Statistic extends Model
         'data' => '{}',
     ];
 
+    /**
+     * Get the sub-statistic associated with the statistic.
+     */
+    public function subStatistic(): HasOne
+    {
+        return $this->hasOne(SubStatistic::class);
+    }
+
     public function refreshData(): void
     {
         $this->data = [
@@ -41,5 +51,12 @@ class Statistic extends Model
         ];
 
         $this->save();
+
+        $subStatData = fake()->sentence(10);
+
+        $this->subStatistic()->updateOrCreate(
+            [],
+            ['data' => $subStatData]
+        );
     }
 }

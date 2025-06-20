@@ -7,6 +7,7 @@ use Filament\Forms\Components\CodeEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\KeyValueEntry;
+use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -33,6 +34,22 @@ class StatisticForm
                             ->schema(static::getFormFields()),
                         Tab::make(__('Data'))
                             ->schema(static::getDataFields()),
+                        Tab::make('Relationship')
+                            ->schema([
+                                Group::make()
+                                    ->relationship('subStatistic')
+                                    ->schema([
+                                        CodeEditor::make('data')
+                                            ->label('Substats from relationship')
+                                            ->disabled()
+                                            ->columnSpanFull(),
+
+                                        Textarea::make('data')
+                                            ->label('Substats from relationship')
+                                            ->disabled()
+                                            ->columnSpanFull(),
+                                    ]),
+                            ]),
                 ])
                 ->columnSpanFull(),
             ]);
@@ -90,6 +107,7 @@ class StatisticForm
                                 ->columnSpanFull(),
                         ]),
                 ]),
+
         ];
     }
 }

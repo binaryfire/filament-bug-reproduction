@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Code;
 use App\Models\Statistic;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\SubStatistic;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -33,6 +34,10 @@ class DatabaseSeeder extends Seeder
         $stat = Statistic::create([
             'name' => 'Test',
             'description' => 'This is a test stat.',
+        ]);
+
+        SubStatistic::create([
+            'statistic_id' => $stat->id,
         ]);
 
         $stat->refreshData();
