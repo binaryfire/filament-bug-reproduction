@@ -9,6 +9,7 @@ use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Schemas\Schema;
+use Livewire\Component;
 
 class EditStatistic extends EditRecord
 {
@@ -20,26 +21,5 @@ class EditStatistic extends EditRecord
             ViewAction::make(),
             DeleteAction::make(),
         ];
-    }
-
-    public function content(Schema $schema): Schema
-    {
-        return $schema
-            ->components([
-                Action::make('refreshData')
-                    ->label('Refresh data')
-                    ->icon('heroicon-o-arrow-path')
-                    ->action(function () {
-                        $this->record->refreshData();
-
-                        Notification::make()
-                            ->success()
-                            ->title('Data refreshed')
-                            ->send();
-                    }),
-
-                $this->getFormContentComponent(),
-                $this->getRelationManagersContentComponent(),
-            ]);
     }
 }

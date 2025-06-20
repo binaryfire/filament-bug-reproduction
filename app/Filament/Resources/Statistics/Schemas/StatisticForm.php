@@ -3,16 +3,20 @@
 namespace App\Filament\Resources\Statistics\Schemas;
 
 use App\Filament\Resources\Statistics\Widgets\StatChartWidget;
+use App\Models\Statistic;
+use Filament\Actions\Action;
 use Filament\Forms\Components\CodeEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\KeyValueEntry;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
+use Livewire\Component;
 
 class StatisticForm
 {
@@ -20,6 +24,19 @@ class StatisticForm
     {
         return $schema
             ->components([
+                Action::make('refreshData')
+                    ->label('Refresh data')
+                    ->icon('heroicon-o-arrow-path')
+                    ->action(function (Statistic $record, Component $livewire) {
+                        $record->refreshData();
+                        $livewire->refreshFormData(['subStatistic']);
+
+                        Notification::make()
+                            ->success()
+                            ->title('Data refreshed')
+                            ->send();
+                    }),
+
                 Livewire::make(StatChartWidget::class, fn ($record) => [
                         'record' => $record,
                     ])
