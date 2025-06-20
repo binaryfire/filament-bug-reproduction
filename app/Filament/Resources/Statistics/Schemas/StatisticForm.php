@@ -22,6 +22,7 @@ class StatisticForm
                         'record' => $record,
                     ])
                     ->key(Str::random(10))
+                    ->hidden(fn ($operation) => $operation === 'create')
                     ->columnSpanFull(),
 
                 Tabs::make('tabs')
@@ -51,6 +52,7 @@ class StatisticForm
                     'record' => $record,
                 ])
                 ->key(Str::random(10))
+                ->hidden(fn ($operation) => $operation === 'create')
                 ->columnSpanFull(),
         ];
     }
@@ -62,10 +64,12 @@ class StatisticForm
     {
         return [
             Tabs::make('Data')
+                ->hidden(fn ($operation) => $operation === 'create')
                 ->tabs([
                     Tab::make('Raw')
                         ->schema([
                             KeyValueEntry::make('data')
+                                ->hidden(fn ($operation) => $operation === 'create')
                                 ->label('Raw data')
                                 ->keyLabel('Month')
                                 ->valueLabel('Value'),
