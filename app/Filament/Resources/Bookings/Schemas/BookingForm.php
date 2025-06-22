@@ -5,9 +5,11 @@ namespace App\Filament\Resources\Bookings\Schemas;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class BookingForm
 {
@@ -28,11 +30,20 @@ class BookingForm
                             ->preload()
                             ->required(),
 
+                        Toggle::make('disabled_dates')
+                            ->label('Disable Dates')
+                            ->live(),
+
                         DatePicker::make('date')
                             ->native(false)
                             ->required()
                             ->closeOnDateSelection()
-                            ->disabledDates(fn () => [now()->addDays(1)->toDateString()])
+                            ->disabledDates(function (Get $get) {
+                                if ($get('disabled_dates')) {
+                                    return [now()->addDays(1)->toDateString()];
+                                }
+                                return [];
+                            })
                             ->minDate(now()->subDays(20))
                             ->maxDate(now()->addDays(15))
                             ->live(),
