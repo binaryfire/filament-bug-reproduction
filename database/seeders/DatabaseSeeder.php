@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Booking;
 use App\Models\Code;
-use App\Models\Statistic;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Statistic;
 use App\Models\SubStatistic;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -41,5 +42,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $stat->refreshData();
+
+        Booking::create([
+            'venue_id' => 1,
+            'date' => now(),
+            'slot_id' => 1,
+            'name' => 'John',
+            'date_of_birth' => now()->subYears(20),
+            'date_of_wedding' => now()->subYears(5)
+        ]);
     }
 }
