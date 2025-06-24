@@ -1,0 +1,94 @@
+/*
+ * Fixes for Vite dev server style issues
+ * See:
+ * https://github.com/filamentphp/filament/issues/16257
+ * https://github.com/filamentphp/filament/pull/16527
+ */
+
+/* Checked state for non-outlined buttons */
+input:checked + .fi-btn:is(label):not(.fi-outlined) {
+    background-color: oklch(70.7% 0.022 261.325); /* bg-gray-400 */
+    color: rgb(255 255 255); /* text-white */
+    box-shadow: none; /* ring-0 */
+}
+
+.dark input:checked + .fi-btn:is(label):not(.fi-outlined) {
+    background-color: oklch(44.6% 0.03 256.802); /* dark:bg-gray-600 */
+}
+
+/* Hover state for checked non-outlined buttons */
+input:checked + .fi-btn:is(label):not(.fi-outlined):not(.fi-disabled):not([disabled]):hover {
+    background-color: oklch(87.2% 0.01 258.338); /* hover:bg-gray-300 */
+}
+
+.dark input:checked + .fi-btn:is(label):not(.fi-outlined):not(.fi-disabled):not([disabled]):hover {
+    background-color: oklch(55.1% 0.027 264.364); /* dark:hover:bg-gray-500 */
+}
+
+/* Checked state for colored non-outlined buttons */
+input:checked + .fi-btn:is(label):not(.fi-outlined).fi-color {
+    background-color: var(--bg);
+    color: var(--text);
+    box-shadow: none; /* ring-0 */
+}
+
+.dark input:checked + .fi-btn:is(label):not(.fi-outlined).fi-color {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Hover state for checked colored non-outlined buttons */
+input:checked + .fi-btn:is(label):not(.fi-outlined).fi-color:not(.fi-disabled):not([disabled]):hover {
+    background-color: var(--hover-bg);
+    color: var(--hover-text);
+}
+
+.dark input:checked + .fi-btn:is(label):not(.fi-outlined).fi-color:not(.fi-disabled):not([disabled]):hover {
+    background-color: var(--dark-hover-bg);
+    color: var(--dark-hover-text);
+}
+
+/* Focus visible state for button labels */
+input:focus-visible + .fi-btn:is(label):not(.fi-disabled):not([disabled]) {
+    z-index: 10;
+    box-shadow: 0 0 0 2px oklch(13% 0.028 261.692 / 0.1); /* ring-2 ring-gray-950/10 */
+}
+
+.dark input:focus-visible + .fi-btn:is(label):not(.fi-disabled):not([disabled]) {
+    box-shadow: 0 0 0 2px oklch(1 0 0 / 0.2); /* dark:ring-white/20 */
+}
+
+/* Focus visible state for checked colored buttons */
+input:checked:focus-visible + .fi-btn:is(label):not(.fi-disabled):not([disabled]).fi-color {
+    box-shadow: 0 0 0 2px oklch(from var(--color-500) l c h / 0.5); /* ring-color-500/50 */
+}
+
+.dark input:checked:focus-visible + .fi-btn:is(label):not(.fi-disabled):not([disabled]).fi-color {
+    box-shadow: 0 0 0 2px oklch(from var(--color-400) l c h / 0.5); /* dark:ring-color-400/50 */
+}
+
+/* Icon color for checked buttons */
+input:checked + label.fi-btn > .fi-icon {
+    color: var(--text);
+}
+
+.dark input:checked + label.fi-btn > .fi-icon {
+    color: var(--dark-text);
+}
+
+/* Button borders */
+.fi-btn:not(.fi-color) {
+    box-shadow: 0 0 0 1px oklch(13% 0.028 261.692 / 0.1); /* ring-1 ring-gray-950/10 */
+}
+
+.dark .fi-btn:not(.fi-color) {
+    box-shadow: 0 0 0 1px oklch(1 0 0 / 0.2); /* dark:ring-white/20 */
+}
+
+.fi-btn:is(label) {
+    box-shadow: 0 0 0 1px oklch(13% 0.028 261.692 / 0.1); /* ring-1 ring-gray-950/10 */
+}
+
+.dark .fi-btn:is(label) {
+    box-shadow: 0 0 0 1px oklch(1 0 0 / 0.2); /* dark:ring-white/20 */
+}

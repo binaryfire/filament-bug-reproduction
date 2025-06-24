@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Filament\Support\Assets\Css;
+use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentView;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -22,7 +24,20 @@ class AppServiceProvider extends ServiceProvider
                         ->mixedCase();
         });
 
-        //$this->configureViteHotReload();
+        $this->configureViteHotReload();
+        // $this->fixViteDevStylesBug();
+    }
+
+    /**
+     * Add CSS to fix the Vite dev styles bug.
+     */
+    private function fixViteDevStylesBug(): void
+    {
+        if (! app()->environment('production')) {
+            FilamentAsset::register([
+                Css::make('filament-vite-dev-fix', base_path('resources/css/filament/vite-dev-fix.css')),
+            ]);
+        }
     }
 
     /**
