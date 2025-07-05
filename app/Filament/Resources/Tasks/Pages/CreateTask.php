@@ -9,6 +9,9 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Pages\CreateRecord\Concerns\HasWizard;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Text;
+use Filament\Schemas\Components\UnorderedList;
 use Filament\Schemas\Components\Wizard\Step;
 use Filament\Support\Icons\Heroicon;
 
@@ -30,6 +33,17 @@ class CreateTask extends CreateRecord
                 ->schema([
                     TextInput::make('title')
                         ->required(),
+
+                    Section::make('A section')
+                        ->description('Select a user to assign this task to')
+                        ->schema([
+                            UnorderedList::make([
+                                Text::make('Lorem ipsum'),
+                                Text::make('Dolor sit amet'),
+                                Text::make('Consectetur adipiscing'),
+                                Text::make('Sed do eiusmod'),
+                            ]),
+                        ]),
 
                     Textarea::make('description'),
                 ]),
