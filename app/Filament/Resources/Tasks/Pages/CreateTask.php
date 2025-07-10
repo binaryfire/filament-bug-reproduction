@@ -17,7 +17,7 @@ use Filament\Support\Icons\Heroicon;
 
 class CreateTask extends CreateRecord
 {
-    use HasWizard;
+    // use HasWizard;
 
     protected static string $resource = TaskResource::class;
 

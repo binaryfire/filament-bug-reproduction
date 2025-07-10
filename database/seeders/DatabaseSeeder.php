@@ -7,6 +7,7 @@ use App\Models\Code;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Statistic;
 use App\Models\SubStatistic;
+use App\Models\TaskTag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +24,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        TaskTag::factory(8)->create();
 
         $htmlContent = file_get_contents(resource_path('seeder-data/exception.html'));
 

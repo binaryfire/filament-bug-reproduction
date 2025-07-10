@@ -25,6 +25,11 @@ class TasksTable
                     ->limit(50)
                     ->searchable(),
 
+                TextColumn::make('tags.name')
+                    ->label('Tags')
+                    ->badge()
+                    ->wrap(),
+
                 TextColumn::make('due_date')
                     ->label('Due date')
                     ->dateTime()
@@ -37,11 +42,11 @@ class TasksTable
             ->filters([
                 //
             ])
-            ->actions([
+            ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

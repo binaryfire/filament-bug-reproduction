@@ -19,6 +19,12 @@ class TaskForm
 
                 Textarea::make('description'),
 
+                Select::make('tags')
+                    ->label('Tags')
+                    ->multiple()
+                    ->relationship('tags', 'name')
+                    ->preload(),
+
                 DatePicker::make('due_date')
                     ->label('Due date')
                     ->placeholder('Select a date'),

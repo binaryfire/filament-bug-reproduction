@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\TaskTag;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 
@@ -71,6 +73,11 @@ class Task extends Model
             'status' => 'pending',
             'completed_at' => null,
         ]);
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(TaskTag::class);
     }
 
     /**
