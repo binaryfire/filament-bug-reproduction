@@ -18,7 +18,7 @@ use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Alignment;
 
-class RepeaterAlpineErrors extends Page
+class RepeaterPage extends Page
 {
     protected string $view = 'filament.pages.test-page';
 
@@ -51,15 +51,6 @@ class RepeaterAlpineErrors extends Page
                     ->live(debounce: 300)
                     ->persistTab()
                     ->tabs([
-                        Tab::make('Tabbington Bear')
-                            ->schema([
-                                TextInput::make('name')
-                                    ->columnSpanFull(),
-
-                                Textarea::make('description')
-                                    ->columnSpanFull(),
-                            ]),
-
                         Tab::make(__('Mr Gruber'))
                             ->schema([
                                 Repeater::make('items')
@@ -84,6 +75,15 @@ class RepeaterAlpineErrors extends Page
 
                                         TextInput::make('description'),
                                     ])
+                            ]),
+
+                        Tab::make('Tabbington Bear')
+                            ->schema([
+                                TextInput::make('name')
+                                    ->columnSpanFull(),
+
+                                Textarea::make('description')
+                                    ->columnSpanFull(),
                             ]),
                 ])
                 ->columnSpanFull(),
