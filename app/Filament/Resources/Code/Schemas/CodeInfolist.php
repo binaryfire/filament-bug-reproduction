@@ -15,11 +15,11 @@ class CodeInfolist
             ->components([
                 TextEntry::make('name'),
 
-                CodeEntry::make('code')
-                    ->grammar(Grammar::Html),
-
                 // CodeEntry::make('code')
-                //     ->grammar(Grammar::Json),
+                //     ->grammar(Grammar::Html),
+
+                CodeEntry::make('code')
+                    ->grammar(Grammar::Json),
 
                 // TextEntry::make('code'),
 

@@ -30,8 +30,16 @@ class DatabaseSeeder extends Seeder
         $htmlContent = file_get_contents(resource_path('seeder-data/exception.html'));
 
         Code::create([
-            'name' => 'Test',
+            'name' => 'Test HTML',
             'code' => $htmlContent,
+            'user_id' => 1,
+        ]);
+
+        $jsonComments = file_get_contents(resource_path('seeder-data/comments.json'));
+
+        Code::create([
+            'name' => 'Test Comments JSON',
+            'code' => $jsonComments,
             'user_id' => 1,
         ]);
 
