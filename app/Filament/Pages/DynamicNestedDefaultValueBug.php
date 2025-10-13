@@ -21,9 +21,9 @@ class DynamicNestedDefaultValueBug extends Page
     {
         return $schema
             ->components([
-                Action::make('test')
-                    ->label('Test Default Value')
-                    ->modalHeading('Dynamic Field with Default')
+                Action::make('nested')
+                    ->label('Test Nested (Group)')
+                    ->modalHeading('Dynamic + Nested')
                     ->modalSubmitActionLabel('Submit')
                     ->size(Size::Small)
                     ->schema([
@@ -41,12 +41,12 @@ class DynamicNestedDefaultValueBug extends Page
 
                                 return [
                                     Select::make('target')
-                                        ->label('Target (should default to "blank")')
+                                        ->label('Target (should default to "New Window")')
                                         ->options([
-                                            'blank' => 'New Window',
-                                            'self' => 'Same Window',
+                                            '_blank' => 'New Window',
+                                            '_self' => 'Same Window',
                                         ])
-                                        ->default('blank')
+                                        ->default('_blank')
                                         ->required(),
                                 ];
                             }),
@@ -58,7 +58,39 @@ class DynamicNestedDefaultValueBug extends Page
                             ->success()
                             ->send();
 
-                        dump('Data:', $data);
+                        dump('Nested:', $data);
+                    }),
+
+                Action::make('flat')
+                    ->label('Test Flat (No Group)')
+                    ->modalHeading('Dynamic + Flat')
+                    ->modalSubmitActionLabel('Submit')
+                    ->size(Size::Small)
+                    ->schema([
+                        Select::make('type')
+                            ->label('Type')
+                            ->options(['show' => 'Show Field'])
+                            ->required()
+                            ->live(),
+
+                        Select::make('target')
+                            ->label('Target (should default to "New Window")')
+                            ->options([
+                                '_blank' => 'New Window',
+                                '_self' => 'Same Window',
+                            ])
+                            ->default('_blank')
+                            ->required()
+                            ->visible(fn (Get $get) => $get('type') === 'show'),
+                    ])
+                    ->action(function (array $data) {
+                        Notification::make()
+                            ->title('Submitted')
+                            ->body('Target: ' . ($data['target'] ?? 'NULL'))
+                            ->success()
+                            ->send();
+
+                        dump('Flat:', $data);
                     }),
             ]);
     }
