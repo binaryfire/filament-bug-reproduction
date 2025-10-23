@@ -13,8 +13,6 @@ class EscapeKeyModalBug extends Page
 {
     protected string $view = 'filament.pages.test-page';
 
-    protected static ?string $title = 'Escape Key Modal Bug Test';
-
     public int $escapeCount = 0;
     public int $modalOpenCount = 0;
 
